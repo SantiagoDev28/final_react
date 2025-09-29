@@ -1,7 +1,7 @@
 import { TrashIcon } from '@heroicons/react/24/solid';
 
 
-export default function TodoItem({ tarea, toggleCompleted, eliminarTarea }) {
+export default function ToDoItem({ tarea, toggleCompleted, eliminarTarea }) {
   
   
 
