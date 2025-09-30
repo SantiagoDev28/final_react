@@ -1,31 +1,33 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useContext } from 'react'
 import SearchInput from './components/SearchInput'
-import UserCard from './components/UserCard'
+import TaskCard from './components/TaskCard'
 import axios from 'axios'
 import ReactModal from 'react-modal'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { CircularProgress } from '@mui/material'
 import useAuth from './context/useAuth.jsx'
+import Login from './components/Login'
+import ToDoItem from './tasks/components/ToDoItem'
+import { AuthContext } from './context/AuthContext'
+import List from './tasks/components/List'
 
 export default function App() {
   const [usuarios, setUsuarios] = useState([])
   const [loading, setLoading] = useState(false)
   const [modalAbierto, setModalAbierto] = useState(false)
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null)
-  
-
-  const { logout } = useAuth()
+  const { logout, user } = useContext(AuthContext)
 
   const [buscando, setBuscando] = useState(false)
 
   const [filtrados, setFiltrados] = useState([])
 
-  const API_URL = 'http://localhost:3001'
+  const API_URL = 'http://localhost:4000'
 
   const obtenerUsuarios = async () => {
     try {
-      const response = await axios.get(`${API_URL}/usuarios`)
+      const response = await axios.get(`${API_URL}/users`)
 
       setUsuarios(response.data)
       setFiltrados(response.data)
@@ -87,12 +89,20 @@ export default function App() {
     setUsuarioSeleccionado(null)
   }
 
+  if (!user) {
+    return <Login />
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
-      <button className='bg-red-500 text-white px-4 py-2 rounded' onClick={logout}>logout</button>
+      <button
+        className="bg-red-500 text-white px-4 py-2 rounded mb-4"
+        onClick={logout}
+      >
+        Cerrar sesión
+      </button>
       <h1 className="text-2xl font-bold mb-4 text-center">
-        Buscador interactivo
+        Bienvenido, {user.nombre}
       </h1>
       <div className="max-w-md mx-auto mb-6">
         <SearchInput onSearch={filtrarUsuarios} />
@@ -164,6 +174,8 @@ export default function App() {
           </motion.div>
         )}
       </ReactModal>
+      <TodoList />
+      <List />
     </div>
   )
 }

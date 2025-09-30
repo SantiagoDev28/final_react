@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nombre": "Santiago Hurtado",
+      "correo": "santiago@gmail.com",
+      "contraseña": "santi123"
+    },
+    {
+      "id": 2,
+      "nombre": "Ana Sanchez",
+      "correo": "ana@gmail.com",
+      "contraseña": "ana123"
+    }
+  ]
+}
