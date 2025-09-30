@@ -3,14 +3,22 @@
     {
       "id": 1,
       "nombre": "Santiago Hurtado",
-      "correo": "santiago@gmail.com",
+      "alias": "santi",
       "contraseña": "santi123"
     },
     {
       "id": 2,
-      "nombre": "Ana Sanchez",
-      "correo": "ana@gmail.com",
+      "nombre": "Anita",
+      "alias": "ana",
       "contraseña": "ana123"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "2802",
+      "author": "Santiago Hurtado",
+      "text": "hola",
+      "completed": false
     }
   ]
 }
